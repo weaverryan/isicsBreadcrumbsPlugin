@@ -49,7 +49,7 @@ Define the path in your actions:
     [plain]
     public function executeMyAction()
     {
-      isicsBreadcrumbs::getInstance()->addItem('My action', 'myModule/myAction');
+      $this->getBreadcrumbs()->addItem('My action', 'myModule/myAction');
 
     => Home > My action
 

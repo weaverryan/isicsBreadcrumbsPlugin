@@ -11,7 +11,12 @@ class isicsBreadcrumbsPluginConfiguration extends sfPluginConfiguration
 {
   public function initialize()
   {
+    // hook into template.filter_parameters to inject the breadcrumbs variable
     $this->dispatcher->connect('template.filter_parameters', array('isicsBreadcrumbs', 'filterTemplateParameters'));
+
+    // hook into component.method_not_found to extend the actions class
+    $actions = new isicsBreadcrumbsExtendedActions();
+    $this->dispatcher->connect('component.method_not_found', array($actions, 'listenComponentMethodNotFound'));
 
     // auto-enable any modules unless specified not to
     if (sfConfig::get('app_isics_breadcrumbs_enable_modules', true))
