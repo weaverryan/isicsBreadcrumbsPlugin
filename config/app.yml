@@ -1,0 +1,3 @@
+all:
+  isics_breadcrumbs:
+    enable_modules:   true

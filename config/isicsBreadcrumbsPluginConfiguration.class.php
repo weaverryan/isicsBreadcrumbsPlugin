@@ -12,5 +12,14 @@ class isicsBreadcrumbsPluginConfiguration extends sfPluginConfiguration
   public function initialize()
   {
     $this->dispatcher->connect('template.filter_parameters', array('isicsBreadcrumbs', 'filterTemplateParameters'));
+
+    // auto-enable any modules unless specified not to
+    if (sfConfig::get('app_isics_breadcrumbs_enable_modules', true))
+    {
+      sfConfig::set('sf_enabled_modules', array_merge(
+        sfConfig::get('sf_enabled_modules', array()),
+        array('isicsBreadcrumbs')
+      ));
+    }
   }
 }
